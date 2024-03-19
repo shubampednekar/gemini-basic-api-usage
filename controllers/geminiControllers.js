@@ -7,7 +7,11 @@ const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 export const fromTextOnlyInput = async (req,res) => {
     try {
         const { prompt } = req.body;
-        const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+        const generationConfig = {
+            
+            temperature: 0.1
+          };
+        const model = genAI.getGenerativeModel({ model: "gemini-pro", generationConfig});
         
 
         const result = await model.generateContent(prompt);
